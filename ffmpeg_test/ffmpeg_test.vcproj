@@ -186,12 +186,20 @@
 				RelativePath=".\ffmpeg_test.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\gettime.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="헤더 파일"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\gettime.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="리소스 파일"
