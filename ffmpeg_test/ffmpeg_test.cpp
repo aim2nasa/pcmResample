@@ -36,7 +36,7 @@
 #include <assert.h>
 
 #define LENGTH_MS 500		// how many milliseconds of speech to store
-#define RATE 44000		// the sampling rate
+#define RATE 48000		// the sampling rate
 #define CHANNELS 2		// 1 = mono 2 = stereo
 #define ANGLE_STEP_PER_SEC 15.0	// degrees per second
 
@@ -54,7 +54,9 @@ double prev_time = 0.0;
 
 /* this buffer holds the digitized audio */
 char in_buffer[(LENGTH_MS*RATE*16*CHANNELS)/8000];
-char out_buffer[ sizeof( in_buffer ) / 2/* * 4*/];
+//char out_buffer[ sizeof( in_buffer ) / 3 ];	// 16KHz
+//char out_buffer[ sizeof( in_buffer ) / 2 ];	// 24KHz
+char out_buffer[ sizeof( in_buffer ) * 10 / 15 ]; // 32KHz
 
 int dllLinkTest();
 int audioResampleTest();
@@ -177,25 +179,25 @@ int audioResampleTest()
 		total_bytes_read += bytes_read;
 
 		// Resample audio.
-		int out_rate = 16000/*RATE + calc_skew()*/;
+		int out_rate = 32000/*RATE + calc_skew()*/;
 		audio_cntx = test_av_resample_init( out_rate,		// out rate
 			RATE,											// in rate
 			16,												// filter length
 			10,												// phase count
 			1,												// linear FIR filter
-			0.8 );											// cutoff frequency
+			1.0 );											// cutoff frequency
 		assert( audio_cntx && "Failed to create resampling context!" );
 
 		int samples_consumed = 0;
 		int samples_output = test_av_resample( audio_cntx,
-			(short*)out_buffer,
-			(short*)in_buffer,
-			&samples_consumed,
-			bytes_read / 2,
-			sizeof( out_buffer ) / 2, // in samples
-			0 );
+			(short*)out_buffer,								// dst
+			(short*)in_buffer,								// src
+			&samples_consumed,								// consumed
+			bytes_read / 2,									// src_size
+			sizeof( out_buffer ) / 2,						// dst_size
+			0 );											// update_ctx
 		assert( samples_output > 0 && "Error calling av_resample()!" );
-
+//		printf("%d\n", samples_output);
 		test_av_resample_close( audio_cntx );
 
 		fwrite (out_buffer , 1 , sizeof(out_buffer) , outfile );
