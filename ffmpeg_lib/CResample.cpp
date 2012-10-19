@@ -40,21 +40,10 @@ CResample::~CResample()
 
 int CResample::pcm_resample_init(int in_rate, int out_rate)
 {
-	m_hDll = LoadLibrary(TEXT("../bin/avcodec.dll"));
+	assert( in_rate == 48000 && "Doesn't support input rate!" );
 
-	if(m_hDll == NULL)
-	{
-		printf("[ERR] Load Library Failed!!\n");
-		return -1;
-	}
-
-	test_av_resample_init = ( struct AVResampleContext* (*)(int, int, int, int
-		, int, double) ) GetProcAddress(m_hDll, "av_resample_init");
-	test_av_resample = ( int (*)(struct AVResampleContext *, short *, short *, int *, int, int, int) ) GetProcAddress(m_hDll, "av_resample");
-	test_av_resample_close = ( void (*)(struct AVResampleContext *) ) GetProcAddress(m_hDll, "av_resample_close");
-	test_avcodec_register_all = ( void (*)(void) ) GetProcAddress(m_hDll, "avcodec_register_all");
-	test_av_malloc = (void* (*)(size_t)) GetProcAddress(m_hDll, "av_malloc");
-	test_av_freep = (void (*)(void *)) GetProcAddress(m_hDll, "av_freep");
+	// DLL Link
+	avcodec_link();
 
 	// Initialize ffmpeg resampling.
 	test_avcodec_register_all();
@@ -66,18 +55,19 @@ int CResample::pcm_resample_init(int in_rate, int out_rate)
 		1,												// linear FIR filter
 		1.0 );											// cutoff frequency
 	assert( m_audio_cntx && "Failed to create resampling context!" );
-	
+
 	// 따로 분리
 	//char out_buffer[ sizeof( in_buffer ) / 3 ];		// 16KHz
 	//char out_buffer[ sizeof( in_buffer ) / 2 ];		// 24KHz
 	//char out_buffer[ sizeof( in_buffer ) * 10 / 15 ]; // 32KHz
-	
+
 	return 0;
 }
 
 int CResample::pcm_resample_close()
 {
-	FreeLibrary(m_hDll);
+	// DLL Unlink
+	avcodec_unlink();
 
 	return 0;
 }
@@ -94,4 +84,26 @@ int CResample::pcmFileResample(size_t bytes_read, char* p_in_buffer, char* p_out
 	assert( samples_output > 0 && "Error calling av_resample()!" );
 
 	return 0;
+}
+
+int CResample::avcodec_link()
+{
+	m_hDll = LoadLibrary(TEXT("../bin/avcodec.dll"));
+	assert(m_hDll && "Load 'avcodec.dll' library Failed!!");
+
+	test_av_resample_init = ( struct AVResampleContext* (*)(int, int, int, int
+		, int, double) ) GetProcAddress(m_hDll, "av_resample_init");
+	test_av_resample = ( int (*)(struct AVResampleContext *, short *, short *, int *, int, int, int) ) GetProcAddress(m_hDll, "av_resample");
+	test_av_resample_close = ( void (*)(struct AVResampleContext *) ) GetProcAddress(m_hDll, "av_resample_close");
+	test_avcodec_register_all = ( void (*)(void) ) GetProcAddress(m_hDll, "avcodec_register_all");
+	test_av_malloc = (void* (*)(size_t)) GetProcAddress(m_hDll, "av_malloc");
+	test_av_freep = (void (*)(void *)) GetProcAddress(m_hDll, "av_freep");
+
+	return 0;
+}
+
+void CResample::avcodec_unlink()
+{
+	if(m_hDll != NULL)
+		FreeLibrary(m_hDll);
 }
