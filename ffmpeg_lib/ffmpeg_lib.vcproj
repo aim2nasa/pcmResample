@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="ffmpeg_test"
-	ProjectGUID="{66B5B528-0DA3-4F20-8865-1F8A3CF4FCDE}"
-	RootNamespace="ffmpeg_test"
+	Name="ffmpeg_lib"
+	ProjectGUID="{AE605260-0723-47A5-AC3C-C5F47920D544}"
+	RootNamespace="ffmpeg_lib"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -17,9 +17,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="1"
 			>
 			<Tool
@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(SolutionDir)lib;$(SolutionDir)bin;$(SolutionDir)include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;FFMPEG_LIB_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -62,11 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="avcodec.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(SolutionDir)lib"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -96,9 +94,9 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
+			ConfigurationType="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -120,7 +118,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="$(SolutionDir)lib;$(SolutionDir)bin;$(SolutionDir)include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FFMPEG_LIB_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -139,11 +137,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="avcodec.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(SolutionDir)lib"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -183,11 +179,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ffmpeg_test.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\gettime.cpp"
+				RelativePath=".\CResample.cpp"
 				>
 			</File>
 		</Filter>
@@ -197,7 +189,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\gettime.h"
+				RelativePath=".\CResample.h"
 				>
 			</File>
 		</Filter>

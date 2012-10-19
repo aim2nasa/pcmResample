@@ -170,6 +170,16 @@ int audioResampleTest()
 		return -3;
 	}
 
+	// Resample audio.
+	int out_rate = 32000/*RATE + calc_skew()*/;
+	audio_cntx = test_av_resample_init( out_rate,		// out rate
+		RATE,											// in rate
+		16,												// filter length
+		10,												// phase count
+		1,												// linear FIR filter
+		1.0 );											// cutoff frequency
+	assert( audio_cntx && "Failed to create resampling context!" );
+
 	// Loop through the file until all data is read.
 	for( ; !feof( infile ) && !ferror( infile ); )
 	{
@@ -177,17 +187,7 @@ int audioResampleTest()
 		bytes_read = fread( in_buffer, 1, sizeof( in_buffer ), infile );
 		assert( !ferror( infile ) && "Error reading audio file!" );
 		total_bytes_read += bytes_read;
-
-		// Resample audio.
-		int out_rate = 32000/*RATE + calc_skew()*/;
-		audio_cntx = test_av_resample_init( out_rate,		// out rate
-			RATE,											// in rate
-			16,												// filter length
-			10,												// phase count
-			1,												// linear FIR filter
-			1.0 );											// cutoff frequency
-		assert( audio_cntx && "Failed to create resampling context!" );
-
+		
 		int samples_consumed = 0;
 		int samples_output = test_av_resample( audio_cntx,
 			(short*)out_buffer,								// dst
@@ -198,7 +198,6 @@ int audioResampleTest()
 			0 );											// update_ctx
 		assert( samples_output > 0 && "Error calling av_resample()!" );
 //		printf("%d\n", samples_output);
-		test_av_resample_close( audio_cntx );
 
 		fwrite (out_buffer , 1 , sizeof(out_buffer) , outfile );
 		// Play the processed samples.
@@ -214,6 +213,9 @@ int audioResampleTest()
 			angle );
 		fflush( stdout );
 	}
+
+	test_av_resample_close( audio_cntx );
+
 	printf( "\nDone!\n" );
 
 	if(infile!=NULL)

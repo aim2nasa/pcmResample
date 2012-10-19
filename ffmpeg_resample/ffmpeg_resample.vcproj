@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="ffmpeg_test"
-	ProjectGUID="{66B5B528-0DA3-4F20-8865-1F8A3CF4FCDE}"
-	RootNamespace="ffmpeg_test"
+	Name="ffmpeg_resample"
+	ProjectGUID="{3BCC1673-66A0-4218-882D-417A62F92814}"
+	RootNamespace="ffmpeg_resample"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)lib;$(SolutionDir)bin;$(SolutionDir)include"
+				AdditionalIncludeDirectories="$(SolutionDir)include;$(SolutionDir)ffmpeg_lib;$(SolutionDir)bin;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,9 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="avcodec.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(SolutionDir)lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -119,7 +117,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(SolutionDir)lib;$(SolutionDir)bin;$(SolutionDir)include"
+				AdditionalIncludeDirectories="$(SolutionDir)include;$(SolutionDir)ffmpeg_lib;$(SolutionDir)bin;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -139,9 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="avcodec.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(SolutionDir)lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -183,11 +179,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ffmpeg_test.cpp"
+				RelativePath="..\ffmpeg_lib\CResample.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\gettime.cpp"
+				RelativePath=".\ffmpeg_resample.cpp"
 				>
 			</File>
 		</Filter>
@@ -196,10 +192,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\gettime.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="리소스 파일"
