@@ -41,6 +41,7 @@ CResample::~CResample()
 int CResample::pcm_resample_init(int in_rate, int out_rate)
 {
 	assert( in_rate == 48000 && "Doesn't support input rate!" );
+	assert( out_rate == 32000 || out_rate == 24000 || out_rate == 16000 && "Doesn't support output rate!" );
 
 	// DLL Link
 	avcodec_link();
@@ -83,7 +84,7 @@ int CResample::pcmFileResample(size_t bytes_read, char* p_in_buffer, char* p_out
 		0 );												// update_ctx
 	assert( samples_output > 0 && "Error calling av_resample()!" );
 
-	return 0;
+	return samples_output;
 }
 
 int CResample::avcodec_link()
