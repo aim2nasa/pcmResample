@@ -7,6 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_lib", "ffmpeg_lib\ff
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_resample", "ffmpeg_resample\ffmpeg_resample.vcproj", "{3BCC1673-66A0-4218-882D-417A62F92814}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp2_decode", "mp2_decode\mp2_decode.vcproj", "{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp2_decode_test", "mp2_decode_test\mp2_decode_test.vcproj", "{248BBF4C-BDCF-45E8-A7A6-DA2D31335121}"
+	ProjectSection(ProjectDependencies) = postProject
+		{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5} = {16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -25,6 +32,14 @@ Global
 		{3BCC1673-66A0-4218-882D-417A62F92814}.Debug|Win32.Build.0 = Debug|Win32
 		{3BCC1673-66A0-4218-882D-417A62F92814}.Release|Win32.ActiveCfg = Release|Win32
 		{3BCC1673-66A0-4218-882D-417A62F92814}.Release|Win32.Build.0 = Release|Win32
+		{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}.Debug|Win32.Build.0 = Debug|Win32
+		{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}.Release|Win32.ActiveCfg = Release|Win32
+		{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}.Release|Win32.Build.0 = Release|Win32
+		{248BBF4C-BDCF-45E8-A7A6-DA2D31335121}.Debug|Win32.ActiveCfg = Debug|Win32
+		{248BBF4C-BDCF-45E8-A7A6-DA2D31335121}.Debug|Win32.Build.0 = Debug|Win32
+		{248BBF4C-BDCF-45E8-A7A6-DA2D31335121}.Release|Win32.ActiveCfg = Release|Win32
+		{248BBF4C-BDCF-45E8-A7A6-DA2D31335121}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
