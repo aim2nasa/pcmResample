@@ -39,11 +39,11 @@ extern "C" {
 
 #pragma once
 
-DLL_EXPORT int mp2Decode_Init();
+DLL_EXPORT mpg123_handle *mp2Decode_Init();
 DLL_EXPORT void mp2Decode_Cleanup(mpg123_handle* m=NULL);
 DLL_EXPORT void parseMp2Header(MP2_HEADER* pHeader,unsigned char* pBuffer);
 DLL_EXPORT int getBitrate(int nId,int nBitrateIdx);
-DLL_EXPORT int getBufSize(int nBitrate, int nId);
+DLL_EXPORT int getBufSize(int nBitrateIdx, int nId);
 DLL_EXPORT int mp2_decode(mpg123_handle *m, const unsigned char *mp2buffer, size_t nSrcBufferSize, unsigned char *pcmBuffer, size_t outmemsize, size_t *size);
 
 #ifdef __cplusplus

@@ -10,26 +10,26 @@ static const int bitrateTable[2][15]={
 	{0,32,48,56,64,80,96,112,128,160,192,224,256,320,384}	//for 48KHz
 };
 
-int mp2Decode_Init()
+mpg123_handle *mp2Decode_Init()
 {
-	if(mpg123_init()!=MPG123_OK) { cout<<"mpg123_init() failed"; mp2Decode_Cleanup(); return -1; }
+	if(mpg123_init()!=MPG123_OK) { cout<<"mpg123_init() failed"; mp2Decode_Cleanup(); return NULL; }
 
 	int ret=0;
 	mpg123_handle *m = mpg123_new(NULL,&ret);
 	if(m==NULL) {
 		cout<<"mpg123_new() failed"<<endl;
 		mp2Decode_Cleanup();
-		return -1;
+		return NULL;
 	}
 	cout<<"Current decoder:"<<mpg123_current_decoder(m)<<endl;
 
 	if(mpg123_open_feed(m)!=MPG123_OK) {
 		cout<<"mpg123_open_feed() failed"<<endl;
 		mp2Decode_Cleanup(m);
-		return -1;
+		return NULL;
 	}
 
-	return 0;
+	return m;
 }
 
 void mp2Decode_Cleanup(mpg123_handle* m)
@@ -62,12 +62,11 @@ int getBitrate(int nId,int nBitrateIdx)
 	return 1000*bitrateTable[nId][nBitrateIdx];	//kbps unit
 }
 
-int getBufSize(int nBitrate, int nId)
+int getBufSize(int nBitrateIdx, int nId)
 {
 	assert(nId==0 || nId==1);
-	assert(nBitrate>1000);
-
-	int nSrcBufferSize = 144*nBitrate/((nId)?48000:24000);
+	
+	int nSrcBufferSize = 144*getBitrate(nId,nBitrateIdx)/((nId)?48000:24000);
 
 	return nSrcBufferSize;
 }
@@ -82,5 +81,13 @@ int mp2_decode(mpg123_handle *m, const unsigned char *mp2buffer, size_t nSrcBuff
 		mpg123_getformat(m, &rate, &channels, &enc);
 		fprintf(stderr, "New format: %li Hz, %i channels, encoding value %i\n", rate, channels, enc);
 	}
+	
+	while(ret != MPG123_ERR && ret != MPG123_NEED_MORE)
+	{ /* Get all decoded audio that is available now before feeding more input. */
+		ret = mp2_decode(m, NULL, 0, pcmBuffer, outmemsize, size);
+	}
+
+	if(ret == MPG123_ERR){ fprintf(stderr, "some error: %s", mpg123_strerror(m)); }
+
 	return ret;
 }
