@@ -104,7 +104,6 @@ TEST(mp2_decoder_test, mp2_decoder_48KHz){
 		EXPECT_EQ(header.sampling, 1);
 		EXPECT_EQ(header.padding, 0);
 		EXPECT_EQ(header.priv, 0);
-		EXPECT_EQ(header.mode_ext, 0);
 		EXPECT_EQ(header.copyright, 0);
 		EXPECT_EQ(header.orignal, 1);
 		EXPECT_EQ(header.emphasis, 0);
@@ -130,6 +129,61 @@ TEST(mp2_decoder_test, mp2_decoder_48KHz){
 	fclose(outStream);
 
 	filecomp("../contents/dab_48khz_jointstereo_96_subCh(1)_comp.pcm", "dab_48khz_jointstereo_96_subCh(1).pcm");
+}
+
+TEST(mp2_decoder_test, mp2_decoder_24KHz){
+	mpg123_handle *m = mp2Decode_Init();
+	if(m == NULL) EXPECT_EQ(0,1);
+
+	if( (err = fopen_s( &inpStream,"../contents/dab_24khz_jointstereo_96_subCh(1).mp2","rb" )) !=0 ) {
+		mp2Decode_Cleanup();
+	}
+	ASSERT_EQ(err, 0);
+	if( (err = fopen_s( &outStream,"dab_24khz_jointstereo_96_subCh(1).pcm","wb" )) !=0 ) {
+	}
+	ASSERT_EQ(err, 0);
+
+	MP2_HEADER header;
+	int nFrameCount =0;
+
+	while( !feof( inpStream ) ) {
+		size_t nRead = fread(mp2buffer,sizeof(unsigned char),4,inpStream);	//read header only
+		if(nRead&&nRead!=4) continue;	//EOF
+		parseMp2Header(&header,mp2buffer);
+
+		EXPECT_EQ(header.sync, 4095);
+		EXPECT_EQ(header.id, 0);
+		EXPECT_EQ(header.layer, 2);
+		EXPECT_EQ(header.protect, 0);
+		EXPECT_EQ(header.bitrateIdx, 10);
+		EXPECT_EQ(header.sampling, 1);
+		EXPECT_EQ(header.padding, 0);
+		EXPECT_EQ(header.priv, 0);
+		EXPECT_EQ(header.copyright, 0);
+		EXPECT_EQ(header.orignal, 1);
+		EXPECT_EQ(header.emphasis, 0);
+
+		int nSrcBufferSize = getBufSize(header.bitrateIdx, header.id);
+		//int nSrcBufferSize = 144*getBitrate(header.id,header.bitrateIdx)/((header.id)?48000:24000);
+		nRead = fread(mp2buffer+4,sizeof(unsigned char),nSrcBufferSize-4,inpStream);	//read rest of the frame
+		if(nRead&&nRead!=(nSrcBufferSize-4)) continue;	//EOF
+
+		size_t nWrite = 0;
+		int ret = mp2_decode(m,mp2buffer,nSrcBufferSize,pcmBuffer,OUTBUFF,&size);
+		EXPECT_NE(ret, MPG123_ERR);
+
+		nWrite = fwrite(pcmBuffer,sizeof(unsigned char),size,outStream);
+		EXPECT_EQ(nWrite, size);
+
+		fprintf(stderr, "[%04i", ++nFrameCount);
+		fprintf(stderr, "]\r");
+		fflush(stderr);
+	}
+
+	fclose(inpStream);
+	fclose(outStream);
+
+	filecomp("../contents/dab_24khz_jointstereo_96_subCh(1)_comp.pcm", "dab_24khz_jointstereo_96_subCh(1).pcm");
 }
 
 int main(int argc, char *argv[])
