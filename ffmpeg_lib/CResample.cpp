@@ -89,7 +89,7 @@ int CResample::pcmFileResample(size_t bytes_read, char* p_in_buffer, char* p_out
 
 int CResample::avcodec_link()
 {
-	m_hDll = LoadLibrary(TEXT("../bin/avcodec.dll"));
+	m_hDll = LoadLibrary(TEXT("avcodec.dll"));
 	assert(m_hDll && "Load 'avcodec.dll' library Failed!!");
 
 	test_av_resample_init = ( struct AVResampleContext* (*)(int, int, int, int

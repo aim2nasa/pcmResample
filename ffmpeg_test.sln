@@ -6,6 +6,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_lib", "ffmpeg_lib\ffmpeg_lib.vcproj", "{AE605260-0723-47A5-AC3C-C5F47920D544}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_resample", "ffmpeg_resample\ffmpeg_resample.vcproj", "{3BCC1673-66A0-4218-882D-417A62F92814}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AE605260-0723-47A5-AC3C-C5F47920D544} = {AE605260-0723-47A5-AC3C-C5F47920D544}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mp2_decode", "mp2_decode\mp2_decode.vcproj", "{16469045-F6DE-4DAC-91EE-4DFF1B8F52C5}"
 EndProject

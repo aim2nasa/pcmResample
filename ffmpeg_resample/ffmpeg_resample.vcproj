@@ -24,6 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="copy $(SolutionDir)bin\dump.pcm $(OutDir)\dump.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_16KHz.pcm $(OutDir)\dump-resampled_16KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_24KHz.pcm $(OutDir)\dump-resampled_24KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_32KHz.pcm $(OutDir)\dump-resampled_32KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump.pcm $(ProjectDir)dump.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_16KHz.pcm $(ProjectDir)dump-resampled_16KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_24KHz.pcm $(ProjectDir)dump-resampled_24KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_32KHz.pcm $(ProjectDir)dump-resampled_32KHz.pcm&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -62,8 +63,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtestd.lib"
+				AdditionalDependencies="gtestd.lib ffmpeg_lib.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)bin\$(ConfigurationName)&quot;;&quot;$(SolutionDir)bin\&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -103,6 +105,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="copy $(SolutionDir)bin\dump.pcm $(OutDir)\dump.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_16KHz.pcm $(OutDir)\dump-resampled_16KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_24KHz.pcm $(OutDir)\dump-resampled_24KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_32KHz.pcm $(OutDir)\dump-resampled_32KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump.pcm $(ProjectDir)dump.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_16KHz.pcm $(ProjectDir)dump-resampled_16KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_24KHz.pcm $(ProjectDir)dump-resampled_24KHz.pcm&#x0D;&#x0A;copy $(SolutionDir)bin\dump-resampled_32KHz.pcm $(ProjectDir)dump-resampled_32KHz.pcm&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -138,8 +141,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtest.lib"
+				AdditionalDependencies="gtest.lib ffmpeg_lib.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(SolutionDir)bin\$(ConfigurationName)"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -181,10 +185,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\ffmpeg_lib\CResample.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ffmpeg_resample.cpp"
 				>
 			</File>
@@ -194,6 +194,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\ffmpeg_lib\CResample.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="리소스 파일"

@@ -14,7 +14,7 @@
 #define RATE 48000		// the sampling rate
 #define CHANNELS 2		// 1 = mono 2 = stereo
 
-class CResample {
+class __declspec(dllexport) CResample {
 public:
 	CResample();
 	virtual ~CResample();
