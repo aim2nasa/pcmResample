@@ -78,7 +78,7 @@ TEST(pcm_resample_test, pcm_resample_16KHz){
 		total_bytes_read += bytes_read;
 		samples_output = res->pcmFileResample(bytes_read, in_buffer, out_buffer, out_buffer_size);
 
-		fwrite (out_buffer , 1 , sizeof(out_buffer) , outfile );
+		fwrite (out_buffer , 1 , samples_output*2 , outfile );
 
 		// Display progress text.
 		printf( "\r48KHz->16KHz Progress: %2.1f%% Complete, Skew: %2.1f%%, Angle: %2.1f Degrees       ", 
@@ -129,7 +129,7 @@ TEST(pcm_resample_test, pcm_resample_24KHz){
 		total_bytes_read += bytes_read;
 		samples_output = res->pcmFileResample(bytes_read, in_buffer, out_buffer, out_buffer_size);
 
-		fwrite (out_buffer , 1 , sizeof(out_buffer) , outfile );
+		fwrite (out_buffer , 1 , samples_output*2 , outfile );
 
 		// Display progress text.
 		printf( "\r48KHz->24KHz Progress: %2.1f%% Complete, Skew: %2.1f%%, Angle: %2.1f Degrees       ", 
@@ -184,7 +184,7 @@ TEST(pcm_resample_test, pcm_resample_32KHz){
 		total_bytes_read += bytes_read;
 		samples_output = res->pcmFileResample(bytes_read, in_buffer, out_buffer, out_buffer_size);
 
-		fwrite (out_buffer , 1 , sizeof(out_buffer) , outfile );
+		fwrite (out_buffer , 1 , samples_output*2 , outfile );
 
 		// Display progress text.
 		printf( "\r48KHz->32KHz Progress: %2.1f%% Complete, Skew: %2.1f%%, Angle: %2.1f Degrees       ", 
