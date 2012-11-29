@@ -90,7 +90,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\pthreadGC2.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\bin\$(ConfigurationName)\"
+				CommandLine="copy ..\bin\pthreadGC2.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\zlib1.dll ..\bin\$(ConfigurationName)\"
 			/>
 		</Configuration>
 		<Configuration
@@ -168,7 +168,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\pthreadGC2.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\bin\$(ConfigurationName)\"
+				CommandLine="copy ..\bin\pthreadGC2.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\zlib1.dll ..\bin\$(ConfigurationName)\"
 			/>
 		</Configuration>
 	</Configurations>
