@@ -24,9 +24,9 @@ public:
 	CResample();
 	virtual ~CResample();
 
-	int init(int in_rate, int out_rate);
+	int init(int out_rate, int in_rate, int filter_length, int log2_phase_count, int linear, double cutoff);
 	int close();
-	int resample(size_t bytes_read, char* p_in_buffer, char* p_out_buffer, int out_buffer_size);
+	int resample(short *dst, short *src, int *consumed, int src_size, int dst_size, int update_ctx=0);
 	
 protected:
 	int avcodec_link();
@@ -36,14 +36,10 @@ protected:
 	// Dynamic Linking
 	HMODULE						m_hDll;
 	struct AVResampleContext*	m_audio_cntx;
-	int							m_samples_consumed;
 
-	struct AVResampleContext* (*test_av_resample_init)(int, int, int, int, int, double);
-	int (*test_av_resample)(struct AVResampleContext *, short *, short *, int *, int, int, int);
-	void (*test_av_resample_close)(struct AVResampleContext *);
-	void (*test_avcodec_register_all)(void);
-	void *(*test_av_malloc)(size_t);
-	void (*test_av_freep)(void *);
+	struct AVResampleContext* (*fp_av_resample_init)(int, int, int, int, int, double);
+	int (*fp_av_resample)(struct AVResampleContext *, short *, short *, int *, int, int, int);
+	void (*fp_av_resample_close)(struct AVResampleContext *);
 };
 
 #endif
