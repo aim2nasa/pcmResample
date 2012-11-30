@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)include;$(SolutionDir)ffmpeg_lib;$(SolutionDir)bin;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)ffmpeg_lib&quot;;&quot;$(SolutionDir)bin&quot;;&quot;$(SolutionDir)pcmRsp&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(SolutionDir)include;$(SolutionDir)ffmpeg_lib;$(SolutionDir)bin;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)ffmpeg_lib&quot;;&quot;$(SolutionDir)bin&quot;;&quot;$(SolutionDir)pcmRsp&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -197,7 +197,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\ffmpeg_lib\CResample.h"
+				RelativePath="..\pcmRsp\CResample.h"
 				>
 			</File>
 		</Filter>
