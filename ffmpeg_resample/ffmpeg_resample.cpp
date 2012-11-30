@@ -25,23 +25,23 @@ TEST(pcm_resample_test, init_and_close){
 	
 	CResample *res = new CResample;
 
-	ret = res->pcm_resample_init(48000, 32000);
+	ret = res->init(48000, 32000);
 
 	EXPECT_EQ(ret,0);
 
-	res->pcm_resample_close();
+	res->close();
 
-	ret = res->pcm_resample_init(48000, 24000);
-
-	EXPECT_EQ(ret,0);
-
-	res->pcm_resample_close();
-
-	ret = res->pcm_resample_init(48000, 16000);
+	ret = res->init(48000, 24000);
 
 	EXPECT_EQ(ret,0);
 
-	res->pcm_resample_close();
+	res->close();
+
+	ret = res->init(48000, 16000);
+
+	EXPECT_EQ(ret,0);
+
+	res->close();
 
 	delete res;
 }
@@ -66,7 +66,7 @@ TEST(pcm_resample_test, pcm_resample_16KHz){
 	err = fopen_s(&outfile, "dump_dest_16KHz.pcm", "wb");
 	EXPECT_EQ(err, 0);
 
-	ret = res->pcm_resample_init(48000, out_rate);
+	ret = res->init(48000, out_rate);
 	EXPECT_EQ(ret,0);
 
 	// Loop through the file until all data is read.
@@ -76,7 +76,7 @@ TEST(pcm_resample_test, pcm_resample_16KHz){
 		bytes_read = fread( in_buffer, 1, sizeof( in_buffer ), infile );
 		assert( !ferror( infile ) && "Error reading audio file!" );
 		total_bytes_read += bytes_read;
-		samples_output = res->pcmFileResample(bytes_read, in_buffer, out_buffer, out_buffer_size);
+		samples_output = res->resample(bytes_read, in_buffer, out_buffer, out_buffer_size);
 
 		fwrite (out_buffer , 1 , samples_output*2 , outfile );
 
@@ -91,7 +91,7 @@ TEST(pcm_resample_test, pcm_resample_16KHz){
 	fclose( infile );
 	fclose( outfile );
 
-	res->pcm_resample_close();
+	res->close();
 	printf( "\nDone!\n" );
 
 	filecomp("dump-resampled_16KHz.pcm", "dump_dest_16KHz.pcm");
@@ -117,7 +117,7 @@ TEST(pcm_resample_test, pcm_resample_24KHz){
 	err = fopen_s(&outfile, "dump_dest_24KHz.pcm", "wb");
 	EXPECT_EQ(err, 0);
 
-	ret = res->pcm_resample_init(48000, out_rate);
+	ret = res->init(48000, out_rate);
 	EXPECT_EQ(ret,0);
 
 	// Loop through the file until all data is read.
@@ -127,7 +127,7 @@ TEST(pcm_resample_test, pcm_resample_24KHz){
 		bytes_read = fread( in_buffer, 1, sizeof( in_buffer ), infile );
 		assert( !ferror( infile ) && "Error reading audio file!" );
 		total_bytes_read += bytes_read;
-		samples_output = res->pcmFileResample(bytes_read, in_buffer, out_buffer, out_buffer_size);
+		samples_output = res->resample(bytes_read, in_buffer, out_buffer, out_buffer_size);
 
 		fwrite (out_buffer , 1 , samples_output*2 , outfile );
 
@@ -142,7 +142,7 @@ TEST(pcm_resample_test, pcm_resample_24KHz){
 	fclose( infile );
 	fclose( outfile );
 
-	res->pcm_resample_close();
+	res->close();
 	printf( "\nDone!\n" );
 
 	filecomp("dump-resampled_24KHz.pcm", "dump_dest_24KHz.pcm");
@@ -172,7 +172,7 @@ TEST(pcm_resample_test, pcm_resample_32KHz){
 // 	err = fopen_s(&samplefile, "dump-resampled_32KHz.pcm", "rb");
 // 	EXPECT_EQ(err, 0);
 
-	ret = res->pcm_resample_init(48000, out_rate);
+	ret = res->init(48000, out_rate);
 	EXPECT_EQ(ret,0);
 
 	// Loop through the file until all data is read.
@@ -182,7 +182,7 @@ TEST(pcm_resample_test, pcm_resample_32KHz){
 		bytes_read = fread( in_buffer, 1, sizeof( in_buffer ), infile );
 		assert( !ferror( infile ) && "Error reading audio file!" );
 		total_bytes_read += bytes_read;
-		samples_output = res->pcmFileResample(bytes_read, in_buffer, out_buffer, out_buffer_size);
+		samples_output = res->resample(bytes_read, in_buffer, out_buffer, out_buffer_size);
 
 		fwrite (out_buffer , 1 , samples_output*2 , outfile );
 
@@ -198,7 +198,7 @@ TEST(pcm_resample_test, pcm_resample_32KHz){
 	fclose( outfile );
 //	fclose( samplefile );
 
-	res->pcm_resample_close();
+	res->close();
 	printf( "\nDone!\n" );
 
 	filecomp("dump-resampled_32KHz.pcm", "dump_dest_32KHz.pcm");
