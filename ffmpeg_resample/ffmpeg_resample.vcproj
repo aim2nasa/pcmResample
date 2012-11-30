@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\dump.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
+				CommandLine="copy ..\bin\dump_48khz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -106,7 +106,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\dump.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
+				CommandLine="copy ..\bin\dump_48khz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -187,7 +187,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\ffmpeg_resample.cpp"
+				RelativePath=".\test.cpp"
 				>
 			</File>
 		</Filter>
