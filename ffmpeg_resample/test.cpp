@@ -1,7 +1,20 @@
 #include <gtest/gtest.h>
 #include "CResample.h"
 
-#define REF_PCM_FRAME_SIZE	(1152*2)	//48khz, short형(2바이트) 기준
+#define REF_PCM_FRAME_SIZE		(1152*2)	//48khz, short형(2바이트) 기준
+#define SAMPLES_PER_SAMPLE_FREQ	48
+
+//===================================================================
+//Table.1 SampleFreq와 sample size의 관계
+//
+//SampleFreq(KHz)	Sample size(short형 기준), 바이트=sample sizex2
+//48				2304개
+//32				1536개
+//24				1152개
+//16				768개
+//
+//1KHz당 샘플수 = 48개
+//===================================================================
 
 void resampTest(int nOutSampFreq,int nInpSampFreq,const char* pInpFIle,const char* pOutFile);
 
@@ -41,6 +54,8 @@ void resampTest(int nOutSampFreq,int nInpSampFreq,const char* pInpFIle,const cha
 	err = fopen_s(&outFile,pOutFile,"wb");
 	EXPECT_EQ(err, 0);
 
+	int nSamples = SAMPLES_PER_SAMPLE_FREQ*nOutSampFreq/1000;
+
 	int nConsumed = 0;
 	size_t nSize = 0;
 	short inpBuffer[REF_PCM_FRAME_SIZE];
@@ -53,6 +68,7 @@ void resampTest(int nOutSampFreq,int nInpSampFreq,const char* pInpFIle,const cha
 		nRtn = pRsp->resample(outBuffer,inpBuffer,&nConsumed,nSize,REF_PCM_FRAME_SIZE);
 		EXPECT_GT(nRtn,0);
 		EXPECT_EQ(nSize,nConsumed);
+		EXPECT_EQ(nRtn,nSamples);	//쓰여진 샘플수가 샘플주파수에 의해 계산된 샘플 계산과 같아야 함 (Table.1)
 		nSize = fwrite(outBuffer,sizeof(short),nRtn,outFile);
 		EXPECT_EQ(nSize,nRtn);
 	}
