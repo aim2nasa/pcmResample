@@ -18,7 +18,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)bin\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			>
@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtestd.lib ffmpeg_lib.lib"
+				AdditionalDependencies="gtestd.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(SolutionDir)bin\$(ConfigurationName)&quot;;&quot;$(SolutionDir)bin\&quot;"
 				GenerateDebugInformation="true"
@@ -93,13 +93,13 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\pthreadGC2.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\zlib1.dll ..\$(ProjectName)\"
+				CommandLine="copy ..\bin\pthreadGC2.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\zlib1.dll ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)bin\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)bin\$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -142,7 +142,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtest.lib ffmpeg_lib.lib"
+				AdditionalDependencies="gtest.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(SolutionDir)bin\$(ConfigurationName)"
 				GenerateDebugInformation="true"
@@ -174,7 +174,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\pthreadGC2.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\zlib1.dll ..\$(ProjectName)\"
+				CommandLine="copy ..\bin\pthreadGC2.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avcodec.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\avutil-51.dll ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\zlib1.dll ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
