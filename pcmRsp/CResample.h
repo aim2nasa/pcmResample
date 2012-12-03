@@ -1,12 +1,6 @@
 #ifndef __CRESAMPLE_H__
 #define __CRESAMPLE_H__
 
-#pragma once
-#ifndef INT64_C
-#define INT64_C(c) (c ## LL)
-#define UINT64_C(c) (c ## ULL)
-#endif
-
 #define RSP_OK					0
 #define RSP_LOAD_LIBRARY_FAIL	-1
 #define RSP_AUDIO_CTX_INIT_FAIL	-2
