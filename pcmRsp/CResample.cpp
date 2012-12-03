@@ -1,4 +1,5 @@
 #include "CResample.h"
+#include <Windows.h>
 #include <assert.h>
 #include <stdio.h>
 #include "libavcodec/avcodec.h"
@@ -43,10 +44,10 @@ int CResample::resample(short *dst, short *src, int *consumed, int src_size, int
 
 int CResample::avcodec_link()
 {
-	m_hDll = LoadLibrary(TEXT("avcodec.dll"));
+	m_hDll = reinterpret_cast<void*>(LoadLibrary(TEXT("avcodec.dll")));
 	if(m_hDll==NULL)
 	{
-		m_hDll = LoadLibraryEx(TEXT("avcodec.dll"), NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
+		m_hDll = reinterpret_cast<void*>(LoadLibraryEx(TEXT("avcodec.dll"), NULL, LOAD_WITH_ALTERED_SEARCH_PATH));
 		if(m_hDll==NULL)
 		{
 			return RSP_LOAD_LIBRARY_FAIL;
@@ -54,16 +55,18 @@ int CResample::avcodec_link()
 	}
 
 	assert(m_hDll);
-	fp_av_resample_init = ( struct AVResampleContext* (*)(int, int, int, int, int, double) ) GetProcAddress(m_hDll, "av_resample_init");
-	fp_av_resample = ( int (*)(struct AVResampleContext *, short *, short *, int *, int, int, int) ) GetProcAddress(m_hDll, "av_resample");
-	fp_av_resample_close = ( void (*)(struct AVResampleContext *) ) GetProcAddress(m_hDll, "av_resample_close");
+	HMODULE hDll = reinterpret_cast<HMODULE>(m_hDll);
+	fp_av_resample_init = ( struct AVResampleContext* (*)(int, int, int, int, int, double) ) GetProcAddress(hDll, "av_resample_init");
+	fp_av_resample = ( int (*)(struct AVResampleContext *, short *, short *, int *, int, int, int) ) GetProcAddress(hDll, "av_resample");
+	fp_av_resample_close = ( void (*)(struct AVResampleContext *) ) GetProcAddress(hDll, "av_resample_close");
 	return RSP_OK;
 }
 
 int CResample::avcodec_unlink()
 {
 	if(m_hDll!=NULL) { 
-		if(FreeLibrary(m_hDll))
+		HMODULE hDll = reinterpret_cast<HMODULE>(m_hDll);
+		if(FreeLibrary(hDll))
 			return RSP_OK;
 		else
 			return RSP_FREELIBRARY_FAIL;

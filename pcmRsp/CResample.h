@@ -7,8 +7,6 @@
 #define UINT64_C(c) (c ## ULL)
 #endif
 
-#include <windows.h>
-
 #define RSP_OK					0
 #define RSP_LOAD_LIBRARY_FAIL	-1
 #define RSP_AUDIO_CTX_INIT_FAIL	-2
@@ -29,8 +27,7 @@ protected:
 	int avcodec_unlink();
 
 protected:
-	// Dynamic Linking
-	HMODULE						m_hDll;
+	void*						m_hDll;
 	struct AVResampleContext*	m_audio_cntx;
 
 	struct AVResampleContext* (*fp_av_resample_init)(int, int, int, int, int, double);
