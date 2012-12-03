@@ -24,7 +24,7 @@ protected:
 	void*						m_hDll;
 	struct AVResampleContext*	m_audio_cntx;
 
-	struct AVResampleContext* (*fp_av_resample_init)(int, int, int, int, int, double);
+	AVResampleContext* (*fp_av_resample_init)(int, int, int, int, int, double);
 	int (*fp_av_resample)(struct AVResampleContext *, short *, short *, int *, int, int, int);
 	void (*fp_av_resample_close)(struct AVResampleContext *);
 };
