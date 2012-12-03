@@ -9,10 +9,6 @@
 
 #include <windows.h>
 
-#define LENGTH_MS 500		// how many milliseconds of speech to store
-#define RATE 48000		// the sampling rate
-#define CHANNELS 2		// 1 = mono 2 = stereo
-
 #define RSP_OK					0
 #define RSP_LOAD_LIBRARY_FAIL	-1
 #define RSP_AUDIO_CTX_INIT_FAIL	-2
