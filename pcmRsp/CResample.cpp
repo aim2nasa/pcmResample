@@ -12,8 +12,8 @@
 #include "libavcodec/avcodec.h"
 
 CResample::CResample()
-:m_hDll(NULL),m_audio_cntx(NULL),
-fp_av_resample_init(NULL),fp_av_resample(NULL),fp_av_resample_close(NULL)
+:m_hDll(NULL),m_pCtx(NULL),
+m_fp_av_audio_resample_init(NULL),m_fp_audio_resample(NULL),m_fp_audio_resample_close(NULL)
 {
 
 }
@@ -23,30 +23,39 @@ CResample::~CResample()
 	
 }
 
-int CResample::init(int out_rate, int in_rate, int filter_length, int log2_phase_count, int linear, double cutoff)
+int CResample::init(int output_channels, int input_channels,int output_rate, int input_rate,
+					enum AVSampleFormat sample_fmt_out,
+					enum AVSampleFormat sample_fmt_in,
+					int filter_length, int log2_phase_count,
+					int linear, double cutoff)
 {
-	assert(in_rate>0&&out_rate>0);
+	assert(output_channels==1||output_channels==2);
+	assert(input_channels==1||input_channels==2);
+	assert(output_rate>0&&input_rate>0);
 
 	int nRtn = avcodec_link();
 	if(nRtn!=RSP_OK) return nRtn;
 
-	m_audio_cntx = fp_av_resample_init(out_rate,in_rate,filter_length,log2_phase_count,linear,cutoff);
-	if(m_audio_cntx==NULL) return RSP_AUDIO_CTX_INIT_FAIL;
+	assert(m_fp_av_audio_resample_init);
+	m_pCtx = m_fp_av_audio_resample_init(output_channels,input_channels,output_rate,input_rate,sample_fmt_out,sample_fmt_in,
+		filter_length,log2_phase_count,linear,cutoff);
+	if(m_pCtx==NULL) return RSP_AUDIO_CTX_INIT_FAIL;
 	return RSP_OK;
+}
+
+int CResample::resample(short *output, short *input, int nb_samples)
+{
+	assert(m_pCtx);
+	assert(output);
+	assert(input);
+	assert(nb_samples>0);
+	return m_fp_audio_resample(m_pCtx,output,input,nb_samples);
 }
 
 int CResample::close()
 {
-	fp_av_resample_close(m_audio_cntx);
+	m_fp_audio_resample_close(m_pCtx);
 	return avcodec_unlink();
-}
-
-int CResample::resample(short *dst, short *src, int *consumed, int src_size, int dst_size, int update_ctx)
-{
-	assert(m_audio_cntx);
-	assert(dst&&src);
-	assert(src_size>0&&dst_size>0);
-	return fp_av_resample(m_audio_cntx,dst,src,consumed,src_size,dst_size,update_ctx);
 }
 
 int CResample::avcodec_link()
@@ -63,9 +72,10 @@ int CResample::avcodec_link()
 
 	assert(m_hDll);
 	HMODULE hDll = reinterpret_cast<HMODULE>(m_hDll);
-	fp_av_resample_init = ( struct AVResampleContext* (*)(int, int, int, int, int, double) ) GetProcAddress(hDll, "av_resample_init");
-	fp_av_resample = ( int (*)(struct AVResampleContext *, short *, short *, int *, int, int, int) ) GetProcAddress(hDll, "av_resample");
-	fp_av_resample_close = ( void (*)(struct AVResampleContext *) ) GetProcAddress(hDll, "av_resample_close");
+
+	m_fp_av_audio_resample_init = ( struct ReSampleContext* (*)(int,int,int,int,enum AVSampleFormat,enum AVSampleFormat,int,int,int,double) ) GetProcAddress(hDll, "av_audio_resample_init");
+	m_fp_audio_resample = ( int (*)(struct ReSampleContext*,short*,short*,int) ) GetProcAddress(hDll, "audio_resample");
+	m_fp_audio_resample_close = ( void (*)(struct ReSampleContext *) ) GetProcAddress(hDll, "audio_resample_close");
 	return RSP_OK;
 }
 

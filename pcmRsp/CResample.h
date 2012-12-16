@@ -12,9 +12,13 @@ public:
 	CResample();
 	virtual ~CResample();
 
-	int init(int out_rate, int in_rate, int filter_length, int log2_phase_count, int linear, double cutoff);
+	int init(int output_channels, int input_channels,int output_rate, int input_rate,
+		enum AVSampleFormat sample_fmt_out,
+		enum AVSampleFormat sample_fmt_in,
+		int filter_length, int log2_phase_count,
+		int linear, double cutoff);
+	int resample(short *output, short *input, int nb_samples);
 	int close();
-	int resample(short *dst, short *src, int *consumed, int src_size, int dst_size, int update_ctx=0);
 	
 protected:
 	int avcodec_link();
@@ -22,11 +26,11 @@ protected:
 
 protected:
 	void*						m_hDll;
-	struct AVResampleContext*	m_audio_cntx;
+	struct ReSampleContext*		m_pCtx;
 
-	AVResampleContext* (*fp_av_resample_init)(int, int, int, int, int, double);
-	int (*fp_av_resample)(struct AVResampleContext *, short *, short *, int *, int, int, int);
-	void (*fp_av_resample_close)(struct AVResampleContext *);
+	ReSampleContext* (*m_fp_av_audio_resample_init)(int,int,int,int,enum AVSampleFormat,enum AVSampleFormat,int,int,int,double);
+	int (*m_fp_audio_resample)(ReSampleContext*,short*,short*,int);
+	void (*m_fp_audio_resample_close)(ReSampleContext*);
 };
 
 #endif
