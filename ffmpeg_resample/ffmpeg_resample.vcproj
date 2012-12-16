@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\dump_48khz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
+				CommandLine="copy ..\bin\dump_48khz_Stereo.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz_Stereo.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -106,7 +106,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\dump_48khz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_16KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_24KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;copy ..\bin\dump-resampled_32KHz.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
+				CommandLine="copy ..\bin\dump_48khz_Stereo.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz.pcm ..\$(ProjectName)\"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
