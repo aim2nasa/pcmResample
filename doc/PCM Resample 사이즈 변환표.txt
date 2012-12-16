@@ -1,0 +1,10 @@
+								nSamples	nRtn
+TEST(pcm_resample_test, From48khz_Stereo_To_16khz_Stereo)	2304		768
+TEST(pcm_resample_test, From48khz_Stereo_To_24khz_Stereo)	2304		1152
+TEST(pcm_resample_test, From48khz_Stereo_To_32khz_Stereo)	2304		1536
+TEST(pcm_resample_test, From48khz_Stereo_To_48khz_Stereo)	2304		2304
+
+TEST(pcm_resample_test, From48khz_Stereo_To_16khz_Mono)		1152		384
+TEST(pcm_resample_test, From48khz_Stereo_To_24khz_Mono)		1152		576
+TEST(pcm_resample_test, From48khz_Stereo_To_32khz_Mono)		1152		768
+TEST(pcm_resample_test, From48khz_Stereo_To_48khz_Mono)		1152		1152
