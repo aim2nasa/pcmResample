@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\dump_48khz_Stereo.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz_Stereo.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
+				CommandLine="copy ..\contents\dump_48khz_Stereo.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\contents\dump_48khz_Stereo.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)ffmpeg_lib&quot;;&quot;$(SolutionDir)bin&quot;;&quot;$(SolutionDir)pcmRsp&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)ffmpeg_lib&quot;;&quot;$(SolutionDir)lib&quot;;&quot;$(SolutionDir)pcmRsp&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="gtestd.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)bin\$(ConfigurationName)&quot;;&quot;$(SolutionDir)bin\&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)bin\$(ConfigurationName)&quot;;&quot;$(SolutionDir)lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -106,7 +106,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\dump_48khz_Stereo.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\bin\dump_48khz_Stereo.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
+				CommandLine="copy ..\contents\dump_48khz_Stereo.pcm ..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy ..\contents\dump_48khz_Stereo.pcm ..\$(ProjectName)\&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -122,7 +122,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)ffmpeg_lib&quot;;&quot;$(SolutionDir)bin&quot;;&quot;$(SolutionDir)pcmRsp&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)ffmpeg_lib&quot;;&quot;$(SolutionDir)lib&quot;;&quot;$(SolutionDir)pcmRsp&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -144,7 +144,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="gtest.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(SolutionDir)bin\$(ConfigurationName)"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)bin\$(ConfigurationName)&quot;;&quot;$(SolutionDir)lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
