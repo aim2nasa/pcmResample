@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\libmpg123.dll ..\bin\$(ConfigurationName)\"
+				CommandLine="copy ..\lib\libmpg123.dll ..\bin\$(ConfigurationName)\"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -104,7 +104,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="copy ..\bin\libmpg123.dll ..\bin\$(ConfigurationName)\"
+				CommandLine="copy ..\lib\libmpg123.dll ..\bin\$(ConfigurationName)\"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
