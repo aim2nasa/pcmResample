@@ -92,8 +92,8 @@ void resampTest(int output_channels,int input_channels,int nOutSampFreq,int nInp
 	if(output_channels==2) nSamples = STEREO_SAMPLES_PER_SAMPLE_FREQ*nInpSampFreq/1000;
 
 	size_t nSize = 0;
-	short inpBuffer[REF_PCM_FRAME_SIZE];
-	short outBuffer[REF_PCM_FRAME_SIZE];
+	short inpBuffer[REF_PCM_FRAME_SIZE*2];
+	short outBuffer[REF_PCM_FRAME_SIZE*2];
 	while(!feof(inpFile)){
 		nSize = fread(inpBuffer,sizeof(short),REF_PCM_FRAME_SIZE,inpFile);
 		if(nSize!=REF_PCM_FRAME_SIZE) 
