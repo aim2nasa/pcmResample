@@ -69,6 +69,14 @@ TEST(pcm_resample_test, From48khz_Stereo_To_48khz_Mono)
 	resampTest(1,2,48000,48000,"dump_48khz_Stereo.pcm","resampled_48KHz_mono.pcm");
 }
 
+int getSampleSize(int nSampleFreq,int nChannels)
+{
+	int nSamples = 0;
+	if(nChannels==1) nSamples = MONO_SAMPLES_PER_SAMPLE_FREQ*nSampleFreq/1000;
+	if(nChannels==2) nSamples = STEREO_SAMPLES_PER_SAMPLE_FREQ*nSampleFreq/1000;
+	return nSamples;
+}
+
 void resampTest(int output_channels,int input_channels,int nOutSampFreq,int nInpSampFreq,const char* pInpFIle,const char* pOutFile)
 {
 	assert(output_channels==1||output_channels==2);
@@ -101,6 +109,7 @@ void resampTest(int output_channels,int input_channels,int nOutSampFreq,int nInp
 
 		nRtn = pRsp->resample(outBuffer,inpBuffer,nSamples);
 		EXPECT_GT(nRtn,0);
+		EXPECT_EQ(nRtn,getSampleSize(nOutSampFreq,output_channels));
 		nSize = fwrite(outBuffer,sizeof(short),nRtn,outFile);
 		EXPECT_EQ(nSize,nRtn);
 	}
