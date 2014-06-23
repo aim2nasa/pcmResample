@@ -43,6 +43,7 @@ int CResample::init(int output_channels, int input_channels,int output_rate, int
 	return RSP_OK;
 }
 
+/* resample audio. 'nb_samples' is the number of input samples */
 int CResample::resample(short *output, short *input, int nb_samples)
 {
 	assert(m_pCtx);

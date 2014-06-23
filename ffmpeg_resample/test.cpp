@@ -81,7 +81,7 @@ void resampTest(int output_channels,int input_channels,int nOutSampFreq,int nInp
 {
 	assert(output_channels==1||output_channels==2);
 
-	CResample *pRsp = new CResample();
+	IResample *pRsp = new CResample();
 
 	int nRtn = pRsp->init(output_channels,input_channels,nOutSampFreq,nInpSampFreq,AV_SAMPLE_FMT_S16,AV_SAMPLE_FMT_S16,16,10,1,0.0);
 	EXPECT_EQ(nRtn,RSP_OK);
