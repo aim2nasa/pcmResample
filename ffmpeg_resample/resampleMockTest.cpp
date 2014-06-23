@@ -45,4 +45,12 @@ void mockRspTest(int input_stream_id,int output_channels,int input_channels,int 
 TEST(pcm_resample_mock_test, resampling)
 {
 	mockRspTest(0,2,2,16000,48000);
+	mockRspTest(1,2,2,24000,48000);
+	mockRspTest(2,2,2,32000,48000);
+	mockRspTest(3,2,2,48000,48000);
+
+	mockRspTest(4,1,2,16000,48000);
+	mockRspTest(5,1,2,24000,48000);
+	mockRspTest(6,1,2,32000,48000);
+	mockRspTest(7,1,2,48000,48000);
 }
