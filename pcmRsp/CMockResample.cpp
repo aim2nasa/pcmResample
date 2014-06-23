@@ -23,7 +23,18 @@ int CMockResample::init(int output_channels, int input_channels,int output_rate,
 int CMockResample::resample(short *output, short *input, int nb_samples)
 {
 	assert(nb_samples==CMockResample::getSampleSize(m_nInpRate,m_nInpChannels));
-	return CMockResample::getSampleSize(m_nOutRate,m_nOutChannels);
+
+	int nOutSamples = CMockResample::getSampleSize(m_nOutRate,m_nOutChannels);
+	memset(output,0,nOutSamples*sizeof(short));
+	memcpy(output,input,nOutSamples*sizeof(short));
+	//입력 스트림의 id를 읽고 여기에 하나를 더해 id를 변경한다
+	output[0] = (((int)input[0])+1);
+	output[1] = m_nOutChannels;
+	writeSampleFreq(output+2,m_nOutRate);
+	output[4] = nOutSamples;
+	output[5] = input[5];
+
+	return nOutSamples;
 }
 
 int CMockResample::close()
