@@ -1,13 +1,9 @@
 #ifndef __CRESAMPLE_H__
 #define __CRESAMPLE_H__
 
-#define RSP_OK					0
-#define RSP_LOAD_LIBRARY_FAIL	-1
-#define RSP_AUDIO_CTX_INIT_FAIL	-2
-#define RSP_LIBRARY_NOT_LOADED	-3
-#define RSP_FREELIBRARY_FAIL	-4
+#include "IResample.h"
 
-class __declspec(dllexport) CResample {
+class __declspec(dllexport) CResample : public IResample{
 public:
 	CResample();
 	virtual ~CResample();
