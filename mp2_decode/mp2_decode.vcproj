@@ -91,7 +91,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\Debug\mp2_decode.lib ..\lib\"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -170,7 +170,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\bin\Release\mp2_decode.lib ..\lib\"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
