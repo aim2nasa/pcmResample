@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="mp2_decode.lib gtestd.lib"
+				AdditionalDependencies="gtestd.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../lib"
 				GenerateDebugInformation="true"
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="mp2_decode.lib gtest.lib"
+				AdditionalDependencies="gtest.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../lib"
 				GenerateDebugInformation="true"
